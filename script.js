@@ -6,22 +6,27 @@ var audioDois = new Audio('interruptor.mp3')
 
 lampada.addEventListener('mouseover', acender)
 lampada.addEventListener('mouseout', apagar)
-lampada.addEventListener('click', quebrar)
+lampada.addEventListener('dblclick', quebrar)
 
 botaoAcender.addEventListener('click', acender)
 botaoApagar.addEventListener('click', apagar)
 
 function acender() {
-    document.getElementById('lampada').src = './img/ligada.jpg'
+    lampada.src = './img/ligada.jpg'
     audioDois.play()
 }
 
 function apagar() {
-    document.getElementById('lampada').src = './img/desligada.jpg'
+    lampada.src = './img/desligada.jpg'
     audioDois.play()
+
 }
 
 function quebrar() {
-    document.getElementById('lampada').src = './img/quebrada.jpg'
+    lampada.src = './img/quebrada.jpg'
+    lampada.removeEventListener('mouseover', acender)
+    lampada.removeEventListener('mouseout', apagar)
+    botaoAcender.removeEventListener('click', acender)
+    botaoApagar.removeEventListener('click', apagar)
     audio.play()
 }
