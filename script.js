@@ -1,32 +1,42 @@
-var lampada = document.getElementById('lampada')
-var botaoAcender = document.getElementById('ligar')
-var botaoApagar = document.getElementById('desligar')
-var audio = new Audio('lampada-quebrando.mp3')
-var audioDois = new Audio('interruptor.mp3')
+const lampada = document.getElementById('lampada');
+const audioQuebrar = new Audio('lampada-quebrando.mp3');
+const audioLigar = new Audio('interruptor.mp3');   
+    
 
-lampada.addEventListener('mouseover', acender)
-lampada.addEventListener('mouseout', apagar)
-lampada.addEventListener('dblclick', quebrar)
+document.addEventListener('click', function(e) {
+    const elemento = e.target;
 
-botaoAcender.addEventListener('click', acender)
-botaoApagar.addEventListener('click', apagar)
+    if(elemento.classList.contains('ligar')) {
+        lampada.src = './img/ligada.jpg';
+        audioLigar.play();
+    }
+    if(elemento.classList.contains('desligar')) {
+        lampada.src = './img/desligada.jpg';
+        audioLigar.play();
+    }
+});
 
-function acender() {
-    lampada.src = './img/ligada.jpg'
-    audioDois.play()
-}
+document.addEventListener('mouseover', function(e) {
+    const elemento = e.target;
+    if(elemento.classList.contains('lampada')) {
+        lampada.src = './img/ligada.jpg';
+        audioLigar.play();
+    }
+});
 
-function apagar() {
-    lampada.src = './img/desligada.jpg'
-    audioDois.play()
+document.addEventListener('mouseout', function(e) {
+    const elemento = e.target;
+    if(elemento.classList.contains('lampada')) {
+        lampada.src = './img/desligada.jpg';
+        audioLigar.play();
+    }
+});
 
-}
-
-function quebrar() {
-    lampada.src = './img/quebrada.jpg'
-    lampada.removeEventListener('mouseover', acender)
-    lampada.removeEventListener('mouseout', apagar)
-    botaoAcender.removeEventListener('click', acender)
-    botaoApagar.removeEventListener('click', apagar)
-    audio.play()
-}
+document.addEventListener('dblclick', function(e) {
+    const elemento = e.target;
+    if(elemento.classList.contains('lampada')) {
+        lampada.src = './img/quebrada.jpg';
+        audioQuebrar.play();
+        
+    }
+});
