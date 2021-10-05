@@ -1,32 +1,33 @@
-var lampada = document.getElementById('lampada')
-var botaoAcender = document.getElementById('ligar')
-var botaoApagar = document.getElementById('desligar')
-var audio = new Audio('lampada-quebrando.mp3')
-var audioDois = new Audio('interruptor.mp3')
+const lampada = document.getElementById('lampada');
+const botaoAcender = document.getElementById('ligar');
+const botaoApagar = document.getElementById('desligar');
 
-lampada.addEventListener('mouseover', acender)
-lampada.addEventListener('mouseout', apagar)
-lampada.addEventListener('dblclick', quebrar)
+const audioQuebraLampada = new Audio('lampada-quebrando.mp3');
+const audioLigaLampada = new Audio('interruptor.mp3');
 
-botaoAcender.addEventListener('click', acender)
-botaoApagar.addEventListener('click', apagar)
+lampada.addEventListener('mouseover', acendeLampada);
+lampada.addEventListener('mouseout', apagaLampada);
+lampada.addEventListener('dblclick', quebraLampada);
 
-function acender() {
+botaoAcender.addEventListener('click', acendeLampada)
+botaoApagar.addEventListener('click', apagaLampada)
+
+function acendeLampada() {
     lampada.src = './img/ligada.jpg'
-    audioDois.play()
+    audioLigaLampada.play();
+    
 }
 
-function apagar() {
+function apagaLampada() {
     lampada.src = './img/desligada.jpg'
-    audioDois.play()
-
+    audioLigaLampada.play()
 }
 
-function quebrar() {
+function quebraLampada() {
     lampada.src = './img/quebrada.jpg'
-    lampada.removeEventListener('mouseover', acender)
-    lampada.removeEventListener('mouseout', apagar)
-    botaoAcender.removeEventListener('click', acender)
-    botaoApagar.removeEventListener('click', apagar)
-    audio.play()
+    lampada.removeEventListener('mouseover', acendeLampada);
+    lampada.removeEventListener('mouseout', apagaLampada);
+    botaoAcender.removeEventListener('click', acendeLampada);
+    botaoApagar.removeEventListener('click', apagaLampada);
+    audioQuebraLampada.play()
 }
