@@ -1,42 +1,33 @@
 const lampada = document.getElementById('lampada');
-const audioQuebrar = new Audio('lampada-quebrando.mp3');
-const audioLigar = new Audio('interruptor.mp3');   
+const botaoAcender = document.getElementById('ligar');
+const botaoApagar = document.getElementById('desligar');
+
+const audioQuebraLampada = new Audio('lampada-quebrando.mp3');
+const audioLigaLampada = new Audio('interruptor.mp3');
+
+lampada.addEventListener('mouseover', acendeLampada);
+lampada.addEventListener('mouseout', apagaLampada);
+lampada.addEventListener('dblclick', quebraLampada);
+
+botaoAcender.addEventListener('click', acendeLampada)
+botaoApagar.addEventListener('click', apagaLampada)
+
+function acendeLampada() {
+    lampada.src = './img/ligada.jpg'
+    audioLigaLampada.play();
     
+}
 
-document.addEventListener('click', function(e) {
-    const elemento = e.target;
+function apagaLampada() {
+    lampada.src = './img/desligada.jpg'
+    audioLigaLampada.play()
+}
 
-    if(elemento.classList.contains('ligar')) {
-        lampada.src = './img/ligada.jpg';
-        audioLigar.play();
-    }
-    if(elemento.classList.contains('desligar')) {
-        lampada.src = './img/desligada.jpg';
-        audioLigar.play();
-    }
-});
-
-document.addEventListener('mouseover', function(e) {
-    const elemento = e.target;
-    if(elemento.classList.contains('lampada')) {
-        lampada.src = './img/ligada.jpg';
-        audioLigar.play();
-    }
-});
-
-document.addEventListener('mouseout', function(e) {
-    const elemento = e.target;
-    if(elemento.classList.contains('lampada')) {
-        lampada.src = './img/desligada.jpg';
-        audioLigar.play();
-    }
-});
-
-document.addEventListener('dblclick', function(e) {
-    const elemento = e.target;
-    if(elemento.classList.contains('lampada')) {
-        lampada.src = './img/quebrada.jpg';
-        audioQuebrar.play();
-        
-    }
-});
+function quebraLampada() {
+    lampada.src = './img/quebrada.jpg'
+    lampada.removeEventListener('mouseover', acendeLampada);
+    lampada.removeEventListener('mouseout', apagaLampada);
+    botaoAcender.removeEventListener('click', acendeLampada);
+    botaoApagar.removeEventListener('click', apagaLampada);
+    audioQuebraLampada.play()
+}
