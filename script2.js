@@ -23,16 +23,17 @@ function lampada() {
 
     document.addEventListener('dblclick', function() {
         lampadaQuebrada();
-    })
+        
+    });
 
     function acendeLampada() {
-        if(!lampadaQuebrada()) {
+        if(!lampadaEstaQuebrada()) {
             lampada.src = './img/ligada.jpg';
         }
     }
 
     function apagaLampada() {
-        if(!lampadaQuebrada()) {
+        if(!lampadaEstaQuebrada()) {
             lampada.src = './img/desligada.jpg';
         }
         
@@ -40,6 +41,10 @@ function lampada() {
 
     function lampadaQuebrada() {
         lampada.src = './img/quebrada.jpg';
+    }
+
+    function lampadaEstaQuebrada() {
+        return lampada.src.indexOf('quebrada') > -1;
     }
 }
 
