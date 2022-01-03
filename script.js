@@ -1,38 +1,51 @@
-function lampadaReal() {
+function lampada() {
+    const lampada = document.querySelector('#lampada');
 
-    const lampada = document.getElementById('lampada');
-    const botaoAcender = document.getElementById('ligar');
-    const botaoApagar = document.getElementById('desligar');
+    lampada.addEventListener('mouseover', function () {
+        acendeLampada();
+    });
 
-    const audioQuebraLampada = new Audio('lampada-quebrando.mp3');
-    const audioLigaLampada = new Audio('interruptor.mp3');
+    lampada.addEventListener('mouseout', function () {
+        apagaLampada();
+    });
 
-    lampada.addEventListener('mouseover', acendeLampada);
-    lampada.addEventListener('mouseout', apagaLampada);
-    lampada.addEventListener('dblclick', quebraLampada);
+    document.addEventListener('click', function (event) {
+        const elemento = event.target;
 
-    botaoAcender.addEventListener('click', acendeLampada)
-    botaoApagar.addEventListener('click', apagaLampada)
+        if (elemento.classList.contains('ligar')) {
+            acendeLampada();
+        }
+
+        if (elemento.classList.contains('desligar')) {
+            apagaLampada();
+        }
+    });
+
+    document.addEventListener('dblclick', function() {
+        lampadaQuebrada();
+        
+    });
 
     function acendeLampada() {
-        lampada.src = './img/ligada.jpg'
-        audioLigaLampada.play();
-        
+        if(!lampadaEstaQuebrada()) {
+            lampada.src = './img/ligada.jpg';
+        }
     }
 
     function apagaLampada() {
-        lampada.src = './img/desligada.jpg'
-        audioLigaLampada.play()
+        if(!lampadaEstaQuebrada()) {
+            lampada.src = './img/desligada.jpg';
+        }
+        
     }
 
-    function quebraLampada() {
-        lampada.src = './img/quebrada.jpg'
-        lampada.removeEventListener('mouseover', acendeLampada);
-        lampada.removeEventListener('mouseout', apagaLampada);
-        botaoAcender.removeEventListener('click', acendeLampada);
-        botaoApagar.removeEventListener('click', apagaLampada);
-        audioQuebraLampada.play()
+    function lampadaQuebrada() {
+        lampada.src = './img/quebrada.jpg';
+    }
+
+    function lampadaEstaQuebrada() {
+        return lampada.src.indexOf('quebrada') > -1;
     }
 }
 
-lampadaReal();
+lampada();
